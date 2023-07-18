@@ -1,9 +1,11 @@
 use std::io;
 use rand::Rng;
-use std::cmp::Ordering;
 
 fn main() {
+
+    loop {
     let secret_number = rand::thread_rng().gen_range(1..=100);
+    println!("The secret number: {}", secret_number);
     println!("Enter a number");
 
     let mut input = String::new();
@@ -16,10 +18,16 @@ fn main() {
 
     println!("You typed: {}", input);
 
-    match input.cmp(&secret_number) {
-        Less => println!("Too small!"),
-        Greater => println!("Too big!"),
-        Equal => println!("You win!"),
+    if secret_number == input {
+        println!("You win!");
+        break;
+    } else if secret_number > input {
+        println!("The secret number is bigger!");
+        continue;
+    } else {
+        println!("The secret number is smaller!");
+        continue;
     }
+}
 }
 
