@@ -3,10 +3,11 @@ use rand::Rng;
 
 fn main() {
 
-    loop {
     let secret_number = rand::thread_rng().gen_range(1..=100);
     println!("The secret number: {}", secret_number);
     println!("Enter a number");
+
+    loop {
 
     let mut input = String::new();
 
