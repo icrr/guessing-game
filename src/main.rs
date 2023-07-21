@@ -12,12 +12,17 @@ fn main() {
 
     let mut input = String::new();
     
-    
     io::stdin()
     .read_line(&mut input)
     .expect("Failed to read line");
 
-    let input: i32 = input.trim().parse().expect("Please, type a number.");
+    let input: i32 = match input.trim().parse() {
+        Ok(num) => num,
+        Err(_) => {
+            println!("Invalid input! Please, type a number.");
+            continue;
+        }
+    };
 
     _attempts += 1;
 
