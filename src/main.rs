@@ -1,12 +1,19 @@
 use std::io;
 use rand::Rng;
 
+enum Difficulty {
+    Easy,
+    Medium,
+    Hard
+}
+
 fn main() {
 
-    let secret_number = rand::thread_rng().gen_range(1..=100);
+    let difficulty = get_difficulty();
+    let secret_number = generate_secret_number(&difficulty);
     println!("Enter a number");
 
-    let mut _attempts: i32 = 0;
+    let mut attempts: i32 = 0;
 
     loop {
 
@@ -24,12 +31,12 @@ fn main() {
         }
     };
 
-    _attempts += 1;
+    attempts += 1;
 
     println!("You typed: {}", input);
 
     if secret_number == input {
-        println!("You win! You got it right in {} tries", _attempts);
+        println!("You win! You got it right in {} tries", attempts);
         break;
     } else if secret_number > input {
         println!("The secret number is bigger!");
@@ -41,3 +48,34 @@ fn main() {
 }
 }
 
+fn get_difficulty() -> Difficulty {
+
+    println!("Choose a difficulty level:
+        1 - Easy
+        2 - Medium
+        3 - Hard
+    ");
+
+    loop {
+        let mut define = String::new();
+        io::stdin()
+        .read_line(&mut define)
+        .expect("Failed to read line");
+
+        match define.trim() {
+            "1" => return Difficulty::Easy,
+            "2" => return Difficulty::Medium,
+            "3" => return Difficulty::Hard,
+            _ => println!("Invalid input! Please, choose a valid option."),
+        }
+    }
+}
+
+
+fn generate_secret_number(difficulty: &Difficulty) -> i32 {
+    match difficulty {
+        Difficulty::Easy => rand::thread_rng().gen_range(1..=10),
+        Difficulty::Medium => rand::thread_rng().gen_range(1..=50),
+        Difficulty::Hard => rand::thread_rng().gen_range(1..=100),
+    }
+}
