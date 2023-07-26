@@ -7,7 +7,7 @@ enum Difficulty {
     Hard
 }
 
-fn main() {
+pub fn main() {
 
     let difficulty = get_difficulty();
     let secret_number = generate_secret_number(&difficulty);
@@ -62,11 +62,15 @@ fn get_difficulty() -> Difficulty {
         .read_line(&mut define)
         .expect("Failed to read line");
 
-        match define.trim() {
-            "1" => return Difficulty::Easy,
-            "2" => return Difficulty::Medium,
-            "3" => return Difficulty::Hard,
+        match define.trim().parse::<i32>() {
+            Ok(1) => return Difficulty::Easy,
+            Ok(2) => return Difficulty::Medium,
+            Ok(3) => return Difficulty::Hard,
             _ => println!("Invalid input! Please, choose a valid option."),
+        }
+
+        for 1 in define {
+            attempts < 10;
         }
     }
 }
@@ -79,3 +83,4 @@ fn generate_secret_number(difficulty: &Difficulty) -> i32 {
         Difficulty::Hard => rand::thread_rng().gen_range(1..=100),
     }
 }
+
