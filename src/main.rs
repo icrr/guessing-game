@@ -68,10 +68,6 @@ fn get_difficulty() -> Difficulty {
             Ok(3) => return Difficulty::Hard,
             _ => println!("Invalid input! Please, choose a valid option."),
         }
-
-        for 1 in define {
-            attempts < 10;
-        }
     }
 }
 
