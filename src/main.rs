@@ -7,6 +7,12 @@ enum Difficulty {
     Hard
 }
 
+enum Score {
+    Normal(i32),
+    Bonus(i32),
+    Perfect(i32),
+}
+
 pub fn main() {
 
     let difficulty: Difficulty = get_difficulty();
